@@ -1,0 +1,23 @@
+함수선언문과 함수표현식
+
+function a() {
+    return 'a';
+}   //함수선언문(function declaration)
+var b = function bb(){
+    return 'bb';
+}   //기명 함수표현식(named function expression)
+var c = function(){
+    return 'c';
+}   //익명 함수표현식(function expression)
+
+
+익명 함수표현식
+    1.변수 c 선언
+    2.익명함수 선언
+    3.변수c에 익명함수를 할당
+
+선언문과 표현식의 차이
+    1. 할당의 여부
+    2. 선언문은 호이스팅되지만, 표현식은 호이스팅 되지않음
+
+함수표현식을 권유함

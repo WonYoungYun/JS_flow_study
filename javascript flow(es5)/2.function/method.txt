@@ -1,0 +1,27 @@
+var obj = {
+    a: 1,
+    b: function bb(){
+        console.log(this);
+    },
+    c: function(){
+        console.log(this.a);
+    }
+};
+
+obj.b();
+obj.c();
+
+console.dir(obj.b);
+console.dir(obj.c);
+
+1.전역 실행컨텍스트 생성(global)
+2.변수 obj 선언
+3.객체 생성/변수 obj에 객체 주소값 할당
+4.obj.b 메소드 호출 -> obj.b 실행컨텍스트 생성
+    4-1. this에 obj 바인딩
+    4-2. this 출력 //obj
+5.obj.b 실행컨텍스트 종료
+
+
+함수와 메소드의 차이점 this를 바인딩 하는가?
+메소드는 .으로 시작한다고 보면됨

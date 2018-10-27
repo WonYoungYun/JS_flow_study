@@ -1,0 +1,37 @@
+변수선언과 함수선언을 끌어올린다.
+console.log(a());
+console.log(b());
+console.log(c());
+
+function a() {
+    return 'a';
+}
+var b = function bb(){
+    return 'bb';
+}
+var c = function(){
+    return 'c';
+}
+
+를 함수실행하면 javascript는 hoisting으로 function a, var b, var c를 끌어올리고
+
+function a(){
+    return 'a';
+}
+var b;
+var c;
+console.log(a());
+console.log(b());
+console.log(c());
+
+b = function bb(){
+    return 'bb';
+}
+
+c = function() {
+    return 'c';
+}
+
+의 상태가 된다.
+
+즉 선언이 어느위치에 있던 먼저 실행되고 할당은 그위치에 도달했을 때 실행된다.

@@ -1,0 +1,30 @@
+콜백 함수
+
+제어권을 넘겨준다. 맡긴다.
+
+
+//주기함수 호출, 인자1: 콜백함수
+setInterval(function(){
+    consoel.log('1초마다 실행된다.');
+}, 1000);
+//인자2: 주기
+
+setInterval(callback, milliseconds)
+callback함수는 setInterval제어권 하에 milliseconds마다 실행
+
+var arr = [1,2,3,4,5];
+var entries = [];
+arr.forEach(function(v, i){ //forEach호출
+    entries.push([i,v,this[i]]); //인자1 : 콜백함수
+}, [10,20,30,40,50]); //인자2: this로 인식할 대상(생략가능)
+console.log(entries);
+
+[[0,1,10],[1,2,20],[2,3,30],[3,4,40],[4,5,50]]
+
+콜백함수를 정의할 때는 제어권을 넘겨받을 대상의 함수의 규칙에 따라야 한다.
+
+
+콜백함수의 특징
+    다른 함수(A)의 매개변수로 콜백함수(B)를 전달하면, A가 B의 제어권을 가진다.
+    특별한 요청(bind)이 없는 한A에 미리 정해진 방식에 따라 B를 호출한다.
+    콜백은 함수이다. 메소드가 아니다.
