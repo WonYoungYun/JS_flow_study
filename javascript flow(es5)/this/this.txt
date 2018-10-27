@@ -1,0 +1,84 @@
+전역공간에서
+    window/global
+
+함수 내부에서
+    window/global
+
+메소드 호출 시
+    메소드 호출 주체(메소드 명 앞)
+    var a ={
+        b: function(){
+            console.log(this);
+        }
+    };
+    a.b();
+    //Object{b:function} a객체를 가르킴
+
+    var a ={
+        b: {
+            c:function(){
+                console.log(this);
+            }
+        }
+    };
+    a.b.c();
+    //Object{c:function} b객체를 가르킨다.
+
+
+    내부함수의 우회법
+        var a = 10;
+        var obj = {
+            a: 20,
+            b: function(){
+                console.log(this.a); //20
+                function c(){
+                    console.log(this.a); //10 b는 메소드이지만 c는 함수이기 떄문에 10이 출력
+                }
+                c();
+            }
+        }
+        obj.b();
+
+        var a = 10;
+        var obj = {
+            a: 20,
+            b: function(){
+                var self = this;
+                console.log(this.a); //20
+                function c(){
+                    console.log(self.a); //내부함수는 self를 찾아 scope chain을 타고 self값의 a를 출력
+                }
+                c();
+            }
+        }
+        obj.b();
+
+callback에서
+    기본적으로 함수내부에서와 동일
+
+    call, apply, bind메소드에 대하여
+        func.call(thisArg[,arg1[,arg2[,...]]])
+        func.apply(thisArg, [argsArray])
+        func.bind(thisArg[,arg1[,arg2[,...]]])
+        thisArg로 this를 지정한다.
+
+        call과 apply는 즉시호출
+        bind는 새로운 함수를 생성(currying)하기만 하고 호출하지는 않는다.
+
+        function a(x,y,z){
+            console.log(this, x, y, z);
+        }
+        var b= {
+            c: 'eee'
+        };
+
+        a.call(b, 1,2,3);
+        a.apply(b, [1,2,3]);
+
+        var c = a.bind(b);
+        c(1,2,3);
+
+        var d = a.bind(b, 1,2);
+        d(3);
+ 
+        모든 결과는 Object {c:"eee"} 1 2 3 으로 동일하다.
