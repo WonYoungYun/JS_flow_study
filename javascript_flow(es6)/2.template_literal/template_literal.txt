@@ -1,0 +1,42 @@
+Template Literal
+
+    기존의 문자열은 \n을 쓰거나, +를 사용하거나 했지만
+    ``(백틱)을 통해 좀더 편하게 쓸 수 있다.
+
+    1.backtick(`)
+    2.multi-line
+    3.string interpolation
+
+    ${} 내에는 값또는 식이 올 수 있다.
+    결국 문자열임으로 자동으로 toString 처리가 된다.
+
+html템플릿으로써도 사용가능
+
+forEach : for문을 돌리는 것과 같은 개념
+    Array.prototype.forEach(callback[, thisArg])
+        callback: function(currentValue[,index [,originalArray]])
+            currentValue: 현재 값
+            index: 현재 인덱스
+            originalArray: 원본 배열
+        thisArg: this에 할당할 대상, 생략시 global객체
+
+map : for문을 돌려서 새로운 배열을 만드는 목적, return 필수
+    Array.prototype.map(callback[, thisArg])
+        callback: function(currentValue[, index[, originalArray]])
+
+reduce : for문을 돌려서 최종적으로 다른 무언가를 만드는 목적, return 필수
+    Array.prototype.reduce(callback[, initialValue])
+        initialValue: 초기값, 생략시 첫번째 인자가 자동저장되며, 이경우 currentValue는 두번째 인자부터 배정된다.
+        callback: function(accumulator, currentValue[, currentIndex[, originalArray]])
+            accumulator: 누적된 계산값
+            currentValue: 현재값
+            currentIndex: 현재 인덱스
+            originalArray: 원본 배열
+
+            
+    메소드는 앞의 인자부터 중요도가 높다.
+
+
+tag function
+    tag함수를 정의해주고, 문자열과 값을 객체에 나눠 담을 수 있다.
+    무조건 문자열이 interpolation보다 한개이상 더 많다.
