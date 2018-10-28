@@ -1,0 +1,52 @@
+지역변수 만들기
+
+var car = {
+    fuel: 10,
+    power: 2,
+    total: 0,
+    run: function(km){
+        var wasteFuel = km / this.power;
+        if(this.fuel < wasteFuel) {
+            console.log('이동불가');
+            return;
+        }
+        this.fuel -= wasteFuel;
+        this.total += km;
+    }
+}
+
+//외부에서 쉽개 개입할 수 있음
+//car.power, car.fuel
+
+
+var createCar = function(f, p){
+    var fuel = f;
+    var power = p;
+    var total = 0;
+    return {
+        run: function(km){
+            var wasteFuel = km/power;
+            if(fuel<wasteFuel){
+                console.log('이동불가');
+                return;
+            }
+            fuel -= wasteFuel;
+            total += km;
+        }
+    }
+};
+var car = createCar(10,2);
+
+1.함수에서 지역변수 및 내부함수 등을 생성한다.
+2.외부에 노출시키고자 하는 멤버들로 구성된 객체를 return 한다.
+-> return한 객체에 포함되지 않은 멤버들은 private하다
+-> return한 객체에 포함된 멤버들은 public 하다.
+
+
+정리
+    함수를 return하면 최초 선언시의 정보를 유지한다.
+    외부에 노출하고자 하는 데이터만 return하면
+    1.접근 권한 제어
+    2.지역변수 보호
+    3.데이터 보존 및 활용
+    이 가능하다.

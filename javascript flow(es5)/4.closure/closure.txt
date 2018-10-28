@@ -1,0 +1,83 @@
+Closure
+
+함수와 그 함수가 선언될 당시의 환경정보 사이의 조합
+scope와 밀접한 관계
+
+함수 내부에서 생성한 데이터와 그 유효범위로 인해 발생하는 특수한 현상
+최초 선언시의 정보를 유지
+
+접근 권한 제어
+지역 변수 보호
+데이터 보존 및 활용
+
+    function a(){
+        var x =1;
+        function b(){
+            console.log(x);
+        }
+        b();
+    }
+    a();
+    console.log(x); // 실행안됨
+
+    function a() {
+        var x = 1;
+        return function b(){
+            console.log(x);
+        }
+    }
+    var c = a();
+    c(); // x의 값을 출력 가능하다
+
+    function a(){
+        var _x = 1;
+        return {
+            get x() {return _x;},
+            set x(v) { _x = v;}
+        }
+    }
+    var c =a();
+    c.x = 10; //get, set 을 이용해 접근 가능
+
+
+
+function setName(name) {
+    return function(){
+        return name;
+    }
+}
+var sayMyName = setName('이름');
+sayMyName();
+
+1.전역 실행 컨텍스트 생성 (global)
+2.함수 setName 선언(global>setName)
+3.변수 sayMyName선언
+4.setName('이름') 호출 -> setName 실행 컨텍스트 생성
+    4-1.지역변수 name 선언 및 '이름' 할당
+    4-2.익명함수 선언(global>setName>unnamed)
+    4-3.익명함수 반환
+5.setName실행 컨텍스트 종료
+6.변수 sayMyName에 반환된 함수를 할당
+7.sayMyName 호출 -> sayMyName 실행 컨텍스트 생성
+    7-1. unnamed scope에서 name 탐색 -> setName에서 name탐색 -> '이름' 반환
+8.sayMyName 실행 컨텍스트 종료
+9.전역 실행컨텍스트 종료
+
+스코프는 정의될 때 결정된다.
+
+function setCounter(){
+    var count = 0;
+    return function() {
+        return ++count;
+    }
+}
+var count = setCounter();
+count();
+
+1.setCounter 정의 (global>setCounter)
+2.setCounter 실행
+3.setCounter 스코프에 count 변수 선언 및 0 할당
+4.익명함수 정의 및 반환(global>setCounter>익명)
+5.반환된 익명함수를 변수 count에 할당
+6.count 실행
+7.익명함수 스코프에서 count탐색 -> setCounter스코프에서 count 탐색 -> count에 1을 증가시킨 값을 반환
