@@ -1,0 +1,72 @@
+prototype, constructor, __proto__
+
+Constructor prototype
+    |           |
+new |           |
+    V           V
+Instance    __proto__   =>Instance로 생략가능
+
+
+
+  Array 1. from()    5. length
+    |   2. isArray() 6. name
+new |   3. of()      7. prototype 7-1. concat()     7-4. map()
+    V   4. arguments              7-2. filter()     7-5. push()
+[1,2,3]                           7-3. forEach()    7-6. pop()
+
+
+4가지 방식으로 생성자의 prototype에 접근이 가능
+[CONSTRUCTOR].prototype
+[instance].__proto__
+[instance]
+Object.getPrototypeOf([instance])
+
+5가지 방식으로 생성자 함수에 접근 가능
+[CONSTRUCTOR]
+[CONSTRUCTOR].prototype.constructor
+(Object.getPrototypeOf([instance])).constructor
+[instance].__proto__.constructor
+[instance].constructor
+
+
+function Person(n,a){
+    this.name = n;
+    this.age = a;
+}
+
+var myName = new Person('이름', 10);
+var yourName = new Person('당신', 25);
+
+myName.setOlder = function(){
+    this.age += 1;
+}
+myName.getAge = function(){
+    return this.age;
+}
+yourName.setOlder = function(){
+    this.age +=1;
+}
+yourName.getAge = function(){
+    return this.age;
+}
+    //동일한 내용이 있음으로 반복을 줄여야 한다.
+
+
+function Person(n,a){
+    this.name = n;
+    this.age = a;
+}
+Person.prototype.setOlder = function(){
+    this.age+=1;
+}
+Person.prototype.getAge = function(){
+    return this.age;
+}
+var myName = new Person('이름',10);
+var yourName = new Person('당신', 25);
+
+
+    //myName.__proto__.getAge();로 접근하면 NaN으로 나온다.
+    //__proto__는 생략가능하기 때문에 myName.getAge();로 접근하면 결과값이 10으로 나온다.
+    //하지만 만약 Person.prototype.age =100;이 정의되어 있다면
+    //myName.__proto__.getAge();는 101이 결과값으로 나온다.

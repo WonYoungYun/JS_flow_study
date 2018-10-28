@@ -1,0 +1,57 @@
+Prototype Chaining
+
+Obejct의 Prototype에는
+    hasOwnProperty()
+    toString()
+    valueOf()
+    isPrototypeOf()가 있으며
+    Prototype Chaining을 통해 접근이 가능하다.
+
+    그래서 객체의 Prototype에는 객체에만 적용될 메소드를 둘 수 없다.
+    객체에 Prototype에 있는 메소드는 모든 타입에 적용되기 떄문
+    객체 생성 함수에 직접 메서드를 만들 수 없다.
+    Object.assign(), Object.create() ...
+
+var arr = [1,2,3];
+
+console.log(arr.toString());//toString은 Object.Prototype에 있는 메소드
+
+
+var arr =[1,2,3];
+arr.toString = function(){
+    return this.join('_');
+}
+
+console.log(arr.toString()); //1_2_3
+console.log(arr.__proto__.toString.call(arr)); //1,2,3
+console.log(arr.__proto__.__proto__.toString.call(arr)); //[object Array]
+
+
+
+
+//arr.toString을 다음과 같이 변경
+Array.prototype.toString = function() {
+    return '[' + this.join(', ') + ']';
+}
+
+//결과가 모두 같게 나온다.
+
+
+
+
+객체의 경우
+    var obj = {
+        a: 1,
+        b: {c: 'c'}
+    };
+    console.log(obj.toString()); //[object Object]
+
+    //Object.prototype의 toString을 수정
+    Object.prototype.toString = function(){
+        var res =[];
+        for(var key in this) {
+            res.push(key + ': '+ this[key].toString());
+        }
+        return '{' + res.join(', ') + '}';
+    }
+    console.log(obj.toString()); //{a: 1, b: {c: c}}
