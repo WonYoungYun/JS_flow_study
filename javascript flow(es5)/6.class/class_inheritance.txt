@@ -1,0 +1,66 @@
+클래스 상속
+
+function Person(name, age){
+    this.name = name || '이름없음';
+    this.age = age || '나이모름';
+}
+Person.prototype.getName = function() {
+    return this.name;
+}
+Person.prototype.getAge = function(){
+    return this.age;
+}
+
+function Employee(name, age, position) {
+    this.name = name || '이름없음';
+    this.age = age || '나이모름';
+    this.position = position || '직책모름';
+}
+
+Employee.prototype = new Person();
+Employee.prototype.constructor = Employee;
+
+Employee.prototype.getPosition = function(){
+    return this.position;
+}
+var myName = new Employee('나', 20, '신입');
+console.dir(myName);
+
+
+
+
+//브릿지를 이용하여 Person의 인스턴스와의 연결을 끊는다.
+
+function Bridge(){}
+Bridge.prototype = Person.prototype;
+Employee.prototype = new Bridge();
+Employee.prototype.console = Employee;
+
+Employee.prototype.getPosition = function(){
+    return this.position;
+}
+
+//Es5에서 클래스상속을 구현할 때 자주 사용'
+
+var extendClass = (function(){
+    function Bridge(){}
+    return function(Parent, Child){
+        Bridge.prototype = Parent.prototype;
+        Child.prototype = new Bridge();
+        Child.prototype.constructor = Child;
+        Child.prototype.superClass = Parent;
+    }
+})();
+
+//이를 활용하여 보다 간단하게 상속가능
+extendClass(Person, Employee);
+Employee.prototype.getPosition = function(){
+    return this.position;
+}
+
+//extendClass에 superClass 메소드를 추가하여 인스턴스의 값도 상속
+
+function Employee(name, age, position) {
+    this.superClass(name, age);
+    this.position = position || '직책모름';
+}

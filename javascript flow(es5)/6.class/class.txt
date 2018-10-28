@@ -1,0 +1,49 @@
+클래스 : 공통적인 속성을 모아 한곳에 묶은 덩어리
+
+인스턴스: 해당클래스의 속성을 지닌 객체
+
+
+음식 -> 과일 -> 배
+음식과 과일은 추상적 : 클래스
+배는 구체적인 물체 : 인스턴스
+
+Array기준
+    from(), isArray(), of()
+    => static methods
+    arguments, length, name
+    => static properties
+    //array생성자함수 객체에 직접 할당되어 있는 프로퍼티
+    //new 연산자 없이 1급객체인 함수로써 호출할때만 의미가 있음
+    //prototype에 정의된 메소드는 methods(prototpye methods) 라고함
+
+    인스턴스에서는 methods로 직접접근이 가능하지만,
+    생성자 함수 내부에 있는 프로퍼티나 메소드는 직접접근이 불가능
+
+
+function Person(name, age) {
+    this._name = name;
+    this._age = age;
+}
+//static method
+Person.getInformations = function(instance) {
+    return {
+        name: instance._name,
+        age: instance._age
+    };
+}
+//(prototpye) method
+Person.prototpye.getName = function(){
+    return this._name;
+}
+Person.prototpye.getAge = function(){
+    return thos._age;
+}
+
+var myName = new Person('이름', 20);
+//OK
+console.log(myName.getName());
+console.log(myName.getAge());
+
+console.log(Person.getInformations(myName));
+//ERROR
+console.log(myName.getInformations(myName));
