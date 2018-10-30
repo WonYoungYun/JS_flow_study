@@ -1,0 +1,49 @@
+-- Primitive Value --
+number
+string
+boolean
+null
+undefined
+Symbol
+
+-- Reference Value --
+object
+array
+function
+Map
+Set
+WeakMap
+WeakSet
+
+Symbol
+    primitive value =>유일무이하고 고유한 존재
+    비공개 멤버에 대한 needs에서 탄생
+    기본적인 열거대상에서 제외
+    암묵적 형변환 불가
+
+
+    Symbol([string]) :문자열이 아닌 타입은 자동으로 toString 처리
+
+    getOwnPropertySymbols()와 ownKeys()로 접근이 가능하지만, 정상적인 접근이라고 보기는 힘들다.
+
+Symbol.for
+    public member => 전역공간에서 공유되는 심볼
+    문자열을 처음사용할 경우 공용공간에 저장하고 다시 선언하면 그 공간에서 가져다 쓴다.
+
+Symbol.keyFor()
+    Symbol.for로 만든 변수의 키값을 가져올 수 있다.
+
+Symbol.match
+Symbol.replace
+Symbol.search 
+    정규표현식 및 문자열 관련
+
+Symbol.species : 파생클래스를 만들기 위한 생성자
+
+Symbol.split: 문자열을 나누는 조건 설정
+
+Symbol.toStringTag: Object.prototype.toString이 호출되었을 때 어떤 명칭을 반환할 지를 지정 가능
+
+Symbol.unscopables: with문과 관련
+
+표준심볼들의 의의: 해당 심볼을 재정의함으로써 기존에는 표준객체 내부 전용이던 기능들을 개발자의 입맛에 맞게 바꾸어 쓸 수 있게 되었음
