@@ -25,3 +25,8 @@ console.log(`Hello\nWorld!`)
 console.log(String.raw `Hello\nWorld!`)
 console.log(String.raw `Hello
 World!`)
+    // Hello
+    // World!
+    // Hello\nWorld!
+    // Hello
+    // World!

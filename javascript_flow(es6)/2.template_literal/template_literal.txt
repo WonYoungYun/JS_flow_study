@@ -40,3 +40,7 @@ reduce : for문을 돌려서 최종적으로 다른 무언가를 만드는 목�
 tag function
     tag함수를 정의해주고, 문자열과 값을 객체에 나눠 담을 수 있다.
     무조건 문자열이 interpolation보다 한개이상 더 많다.
+
+string.raw
+    raw에는 입력했던 내용 그대로 (\n) 저장되어 있다.
+    
